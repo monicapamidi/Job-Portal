@@ -1,0 +1,57 @@
+<div class="background ">
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Highway to Jobs.</h1>
+        <p class="lead">The best companies hire through us. Go chase that dream job.<br> Bon Voyage!</p>
+
+        <h1 class="h3 font-weight-normal">Register</h1>
+        <form class="form-signin text-left" name="form" ng-submit="register()" role="form">
+
+            <div class="mb-1">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" ng-model="user.username" placeholder="Username">
+            </div>
+
+            <div class="mb-1">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" ng-model="user.password"
+                       placeholder="Password">
+            </div>
+
+            <div class="mb-1">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" ng-model="user.email" placeholder="you@example.com">
+            </div>
+
+            <div class="mb-1">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" ng-model="user.location" placeholder="Location">
+            </div>
+
+            <div class="mb-1">
+                <label for="phone">Phone</label>
+                <input type="phone" class="form-control" id="phone" ng-model="user.phone" placeholder="111-111-111">
+            </div>
+
+            <div class="mb-1">
+                <label for="type">Type</label>
+                <select class="form-control" ng-model="user.type" required>
+                    <option value="0">Individual</option>
+                    <option value="1">Company</option>
+                </select>
+            </div>
+
+            <div>
+                <button class="btn btn-lg btn-primary btn-block" ng-disabled="form.$invalid || dataLoading"
+                        type="submit">
+                    Register
+                </button>
+                <img ng-if="dataLoading"
+                     src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+            </div>
+
+            <div class="text-center">
+                <button ng-click="switchLogin()" class="btn btn-link text-white">Cancel</button>
+            </div>
+        </form>
+    </main>
+</div>

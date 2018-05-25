@@ -1,0 +1,153 @@
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <h3 class="masthead-brand">Welcome {{user.username}}</h3>
+            <nav class="nav nav-masthead justify-content-center">
+                <button class="btn btn-outline-danger" ng-click="logout()">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main" class="inner cover">
+        <h1 class="cover-heading">Highway to Jobs.</h1>
+        <p class="lead">The best companies hire through us. Go chase that dream job.<br> Bon Voyage!</p>
+
+        <div ng-if="user.type==0">
+            <form name="searchJobForm" ng-submit="searchJob()" role="form">
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" name="title" id="title" class="form-control"
+                               ng-model="jobSearchData.title"
+                               placeholder="Search by Title"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="location" id="location" class="form-control ml-1"
+                               ng-model="jobSearchData.location"
+                               placeholder="Search by Location"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" name="keywords" id="keywords" class="form-control ml-1"
+                               ng-model="jobSearchData.keywords"
+                               placeholder="Search by Keywords"/>
+                    </div>
+                </div>
+
+                <div class="form-row mt-2">
+                    <div class="col">
+                        <button type="submit" ng-disabled="dataLoading" class="btn btn-block btn-primary">Search
+                        </button>
+                    </div>
+
+                    <div class="col">
+                        <button type="button" class="btn btn-block btn-danger " ng-click="resetSearch()">Reset
+                        </button>
+                    </div>
+
+                    <img ng-if="dataLoading"
+                         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                </div>
+            </form>
+
+            <div class="form-row mt-2">
+                <div class="col">
+                    <button class="btn btn-block btn-primary" ng-click="viewSavedJobs()">View Saved Jobs</button>
+                </div>
+                <div class="col">
+                    <button class="btn btn-block btn-primary" ng-click="viewAppliedJobs()">View Applied Jobs
+                    </button>
+                </div>
+            </div>
+
+            <div ng-if="noJobsFound" class="mt-5">
+                <p class="lead"> No Jobs Found.</p>
+            </div>
+        </div>
+
+        <div ng-if="user.type==1">
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-primary" ng-click="viewPostedJobs()">View Posted Jobs</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-block btn-primary" ng-click="postJob()">Post Job</button>
+                </div>
+            </div>
+
+            <div ng-if="postJobFlow" class="text-left">
+
+                <form class="form-signin" name="form" ng-submit="post()" role="form">
+
+                    <div class="mb-3">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title" class="form-control" ng-model="jobData.title"
+                               placeholder="Title"
+                               required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description">Description</label>
+                        <input type="text" name="description" id="description" class="form-control"
+                               ng-model="jobData.description" placeholder="Description"
+                               required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="location">Location</label>
+                        <input type="text" name="location" id="location" class="form-control"
+                               ng-model="jobData.location" placeholder="Location"
+                               required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="keywords">Keywords</label>
+                        <input type="text" name="keywords" id="keywords" class="form-control"
+                               ng-model="jobData.keywords" placeholder="keywords"
+                               required/>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-lg btn-primary btn-block" ng-disabled="form.$invalid || dataLoading"
+                                type="submit">
+                            Post
+                        </button>
+                        <img ng-if="dataLoading"
+                             src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table ng-show="$data.length > 0" ng-table="tableParams"
+                   class="table table-bordered table-striped table-sm mt-5">
+                <tr ng-repeat="job in $data">
+
+                    <td data-title="'Title'">
+                        {{job.title}}
+                    </td>
+
+                    <td data-title="'Description'">
+                        {{job.description}}
+                    </td>
+
+                    <td data-title="'Location'">
+                        {{job.location}}
+                    </td>
+
+                    <td ng-if="user.type==0">
+                        <button ng-disabled="job.saved" ng-class="job.saved ? 'btn-success':'btn-outline-success'"
+                                class="btn text-white" ng-click="saveJob(job)">{{job.saved ? 'Saved': 'Save'}}
+                        </button>
+
+                        <button ng-disabled="job.applied" ng-class="job.applied ? 'btn-primary':'btn-outline-primary'"
+                                class="btn text-white" ng-click="applyJob(job)">{{job.applied ? 'Applied': 'Apply'}}
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <footer class="mastfoot mt-auto"/>
+</div>
